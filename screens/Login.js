@@ -1,12 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { Component, useState } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import { Text, StyleSheet, View, KeyboardAvoidingView } from 'react-native'
 import { Button, Input, Image } from 'react-native-elements';
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
-const Login = () => {
+const Login = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const signIn = () => {};
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                navigation.replace('Home');
+            }
+        });
+        return () => {
+            unsubscribe();
+        }
+    }, [])
+
+    const signIn = () => {
+        signInWithEmailAndPassword(auth, email, password)
+        .catch((error) => alert(error));
+    }
 
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -16,20 +33,21 @@ const Login = () => {
             <Input 
                 placeholder="Email" 
                 type="email" 
-                value={email} 
+                value={email}
                 onChangeText={(text) => setEmail(text)}
             />
             <Input 
                 placeholder="Password" 
                 secureTextEntry 
                 type="password" 
-                value={password} 
-                onChange={(text) => setPassword(text)}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+                onSubmitEditing={signIn}
             />
         </View>
 
         <Button containerStyle={styles.button} onPress={signIn} title="Login" />
-        <Button containerStyle={styles.button} type="outline" title="Sign Up" />
+        <Button containerStyle={styles.button} onPress={() => navigation.navigate('SignUp')} type="outline" title="Sign Up" />
         <View style={{ height: 200 }} />
 
       </KeyboardAvoidingView>
