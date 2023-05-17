@@ -11,10 +11,6 @@ const Home = ({ navigation }) => {
 
   const [chats, setChats] = useState([]);
 
-  const settings = () => {
-    console.log('Settings');
-  };
-
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'chats'), (snapshot) => {
       setChats(
@@ -35,7 +31,7 @@ const Home = ({ navigation }) => {
       headerTintColor: 'black',
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
-          <TouchableOpacity activeOpacity={0.5} onPress={settings}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('Profile')}>
             <Avatar 
               rounded
               source={{ uri: auth?.currentUser?.photoURL }}
@@ -51,11 +47,11 @@ const Home = ({ navigation }) => {
             width: 80,
           }}
         >
-          <TouchableOpacity activeOpacity={0.5}>
-            <AntDesign name='camerao' size={24} color='black' />
+          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("SearchUser")}>
+            <SimpleLineIcons name='magnifier' size={24} color='black' />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("AddChat")}>
-            <SimpleLineIcons name='pencil' size={24} color='black' />
+          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("CreateGroup")}>
+            <SimpleLineIcons name='plus' size={24} color='black' />
           </TouchableOpacity>
         </View>
       ),

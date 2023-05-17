@@ -15,9 +15,7 @@ const Login = ({ navigation }) => {
                 navigation.replace('Home');
             }
         });
-        return () => {
-            unsubscribe();
-        }
+        return unsubscribe;
     }, [])
 
     const signIn = () => {
