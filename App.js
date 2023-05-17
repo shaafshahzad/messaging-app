@@ -7,8 +7,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import Home from './screens/Home';
-import AddChat from './screens/AddChat';
+import CreateGroup from './screens/CreateGroup';
 import Chat from './screens/Chat';
+import Profile from './screens/Profile';
+import SearchUser from './screens/SearchUser';
 
 const Stack = createStackNavigator();
 
@@ -26,8 +28,10 @@ export default function App() {
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='SignUp' component={SignUp} />
         <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='AddChat' component={AddChat} />
+        <Stack.Screen name='CreateGroup' component={CreateGroup} />
         <Stack.Screen name='Chat' component={Chat} />
+        <Stack.Screen name='Profile' component={Profile} />
+        <Stack.Screen name='SearchUser' component={SearchUser} />
       </Stack.Navigator>
     </NavigationContainer>
   );
