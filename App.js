@@ -5,6 +5,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './screens/Login';
+import SignUp from './screens/SignUp';
+import Home from './screens/Home';
+import AddChat from './screens/AddChat';
+import Chat from './screens/Chat';
 
 const Stack = createStackNavigator();
 
@@ -19,7 +23,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={globalScreenOptions}>
-        <Stack.Screen name ='Login' component={Login} />
+        <Stack.Screen name='Login' component={Login} />
+        <Stack.Screen name='SignUp' component={SignUp} />
+        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='AddChat' component={AddChat} />
+        <Stack.Screen name='Chat' component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
   );
